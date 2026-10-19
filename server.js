@@ -1,7 +1,7 @@
 const http = require('http');
 const { WebSocketServer, WebSocket } = require('ws');
 
-const PORT = process.env.PORT || 9013;
+const PORT = process.env.PORT || 8080;
 const ALLOWED_ORIGINS = process.env.ALLOWED_ORIGINS || '*';
 
 const server = http.createServer((req, res) => {
