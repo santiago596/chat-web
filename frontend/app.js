@@ -37,7 +37,6 @@ function connectWebSocket() {
   socket.onopen = () => {
     updateStatus();
     reconnectDelay = 1000;
-    // ENVIAR EL NOMBRE INMEDIATAMENTE AL ABRIR LA CONEXIÓN
     if (myUsername) {
       socket.send(JSON.stringify({ type: 'join', username: myUsername }));
     }
@@ -47,28 +46,22 @@ function connectWebSocket() {
     const data = JSON.parse(event.data);
 
     if (data.type === 'join_ack') {
-      // CONFIRMACIÓN DEL SERVIDOR: OCULTAR LOGIN Y MOSTRAR CHAT
       loginScreen.classList.add('hidden');
       chatScreen.classList.remove('hidden');
       document.getElementById('user-info').textContent = `Usuario: ${data.username}`;
       messagesBox.innerHTML = '';
       if (data.history) data.history.forEach(appendMessage);
-    } 
-    else if (data.type === 'message') {
+    } else if (data.type === 'message') {
       appendMessage(data);
-    } 
-    else if (data.type === 'sys_message') {
+    } else if (data.type === 'sys_message') {
       appendSystemMessage(data.text);
-    } 
-    else if (data.type === 'user_list') {
+    } else if (data.type === 'user_list') {
       renderUserList(data.users);
-    } 
-    else if (data.type === 'typing') {
+    } else if (data.type === 'typing') {
       if (data.username !== myUsername) {
         typingIndicator.textContent = data.isTyping ? `${data.username} está escribiendo...` : '';
       }
-    } 
-    else if (data.type === 'error') {
+    } else if (data.type === 'error') {
       alert(data.message);
     }
   };
@@ -90,13 +83,13 @@ function connectWebSocket() {
 function appendMessage(msg) {
   const div = document.createElement('div');
   div.className = 'msg';
-  
+
   const boldUser = document.createElement('strong');
   boldUser.textContent = msg.user + ': ';
-  
+
   const textSpan = document.createElement('span');
   textSpan.textContent = msg.text;
-  
+
   const timeSpan = document.createElement('span');
   timeSpan.className = 'time';
   timeSpan.textContent = msg.time;
