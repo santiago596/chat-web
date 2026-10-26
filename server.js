@@ -1,8 +1,8 @@
 const http = require('http');
 const { WebSocketServer, WebSocket } = require('ws');
 
-const PORT = process.env.PORT || 8080;
-const ALLOWED_ORIGINS = process.env.ALLOWED_ORIGINS || '*';
+const PORT = process.env.PORT || 3000;
+const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS || '*').split(',').map(o => o.trim());
 
 const server = http.createServer((req, res) => {
   res.writeHead(200, { 'Content-Type': 'text/plain' });
@@ -43,7 +43,7 @@ server.on('upgrade', (request, socket, head) => {
   const origin = request.headers.origin;
   console.log(`[upgrade] Solicitud de conexión desde origen: ${origin}`);
 
-  if (ALLOWED_ORIGINS !== '*' && origin !== ALLOWED_ORIGINS) {
+  if (!ALLOWED_ORIGINS.includes('*') && !ALLOWED_ORIGINS.includes(origin)) {
     console.log(`[upgrade] Rechazado: Origen no permitido (${origin})`);
     socket.write('HTTP/1.1 403 Forbidden\r\n\r\n');
     socket.destroy();
