@@ -2,8 +2,9 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chat KyraCloud</title>
-  <link rel="stylesheet" href="frontend/styles.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div id="login-screen" class="card">
@@ -11,19 +12,16 @@
     <input type="text" id="username-input" placeholder="Tu nombre..." maxlength="20">
     <button id="join-btn">Entrar</button>
   </div>
-
   <div id="chat-screen" class="card hidden">
     <header>
       <div id="status-badge" class="badge">readyState: -</div>
       <div id="user-info"></div>
     </header>
-
     <div class="chat-container">
       <aside class="sidebar">
         <h3>Conectados</h3>
         <ul id="user-list"></ul>
       </aside>
-
       <main class="chat-main">
         <div id="messages" class="messages-box"></div>
         <div id="typing-indicator" class="typing"></div>
@@ -34,8 +32,7 @@
       </main>
     </div>
   </div>
-
-  <script src="frontend/config.js"></script>
-  <script src="frontend/app.js"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>

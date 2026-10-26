@@ -1,11 +1,8 @@
+// URL wss:// del backend desplegado en KyraCloud (cámbiala por la tuya).
+const BACKEND_URL = 'wss://TU-BACKEND.kyracloud.com';
+
 const localHost = ['localhost', '127.0.0.1'].includes(window.location.hostname);
-const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-const backendHost = 'node-us-east-va.clicfstudios.com:9017';
 
 const CONFIG = {
-  WS_URL: window.CHAT_WS_URL || (
-    localHost
-      ? 'ws://localhost:8080'
-      : `${wsProtocol}//${backendHost}`
-  )
+  WS_URL: window.CHAT_WS_URL || (localHost ? 'ws://localhost:3000' : BACKEND_URL)
 };
